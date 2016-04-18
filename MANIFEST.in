@@ -1,4 +1,4 @@
 include README.md
-recursive-include utils *.py *.html
-recursive-include utils/templates *
-recursive-include utils/static *
+recursive-include accounts *.py *.html
+recursive-include accounts/templates *
+recursive-include accounts/static *
