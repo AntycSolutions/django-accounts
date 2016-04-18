@@ -1,2 +1,2 @@
-# Utils
-Django utilities app
+# django-accounts
+Django accounts app
