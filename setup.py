@@ -7,15 +7,15 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='django-utils',
-    version='0.4.1',  # major.minor[.patch][sub]
-    packages=['utils'],
+    name='django-accounts',
+    version='0.1',  # major.minor[.patch][sub]
+    packages=['accounts'],
     install_requires=['django'],
     include_package_data=True,
     license='MIT License',
-    description='Utilities for the Django web framework',
+    description='Easy accounts integration for the Django web framework',
     long_description=README,
-    url='https://github.com/AntycSolutions/Utils',
+    url='https://github.com/AntycSolutions/django-accounts',
     author='Andrew Charles',
     author_email='andrew.charles@antyc.ca',
     classifiers=[
