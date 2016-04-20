@@ -4,7 +4,8 @@
 
 {% block content %}
 
-    <div class="panel panel-default">
+    {% include 'utils/snippets/messages.html' %}
+    <div class="panel panel-default" style="margin-top: 20px;">
         <div class="panel-heading">
             <h3 class="panel-title">Log in</h3>
         </div>
@@ -43,14 +44,13 @@
                 </div>
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
-
+        </div>
+        <div class="panel-footer">
             {# Assumes you setup the password_reset view in your URLconf #}
-            <p>
-                <a href="{% url 'accounts:password_reset' %}" class="btn btn-default">
-                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                    Lost password?
-                </a>
-            </p>
+            <a href="{% url 'accounts:password_reset' %}" class="btn btn-default">
+                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                Lost password?
+            </a>
         </div>
     </div>
 

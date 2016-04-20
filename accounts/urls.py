@@ -1,15 +1,18 @@
 from django.conf import urls
 from django.core import urlresolvers
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views as auth_views, decorators
 
-from accounts import views as accounts_views
+from accounts import views as accounts_views, forms
 
 
 urlpatterns = [
     urls.url(
         r'^login/$',
         auth_views.login,
-        {'template_name': 'accounts/login.html'},
+        {
+            'template_name': 'accounts/login.html',
+            'authentication_form': forms.AuthenticationForm,
+        },
         name='login'
     ),
     urls.url(
@@ -68,7 +71,7 @@ urlpatterns = [
     ),
     urls.url(
         r'^(?P<pk>\d+)/$',
-        accounts_views.UserDetail.as_view(),
+        decorators.login_required(accounts_views.UserDetail.as_view()),
         name='user_detail'
     ),
 ]
