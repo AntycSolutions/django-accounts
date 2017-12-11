@@ -10,9 +10,8 @@ os.chdir(path.normpath(path.join(path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-accounts',
-    version='0.3',  # major.minor[.patch][sub]
+    version='0.3.1',  # major.minor[.patch][sub]
     packages=['accounts'],
-    install_requires=['django'],
     include_package_data=True,
     license='MIT License',
     description='Easy accounts integration for the Django web framework',
