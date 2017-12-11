@@ -3,70 +3,100 @@ from django.core import urlresolvers
 from django.contrib.auth import views as auth_views, decorators
 
 from accounts import views as accounts_views, forms
+from accounts.conf import settings
 
+
+base_template = settings['base_template']
 
 urlpatterns = [
     urls.url(
         r'^login/$',
-        auth_views.login,
-        {
-            'template_name': 'accounts/login.html',
-            'authentication_form': forms.AuthenticationForm,
-        },
+        auth_views.LoginView.as_view(
+            template_name='accounts/login.html',
+            authentication_form=forms.AuthenticationForm,
+            extra_context={
+                'base_template': base_template
+            }
+        ),
         name='login'
     ),
     urls.url(
         r'^logout/$',
-        auth_views.logout,
-        {'template_name': 'accounts/logout.html'},
+        auth_views.LogoutView.as_view(
+            template_name='accounts/logout.html',
+            extra_context={
+                'base_template': base_template
+            }
+        ),
         name='logout'
     ),
     urls.url(
         r'^password_change/$',
-        auth_views.password_change,
-        {
-            'template_name': 'accounts/password_change_form.html',
-            'post_change_redirect':
-                urlresolvers.reverse_lazy('accounts:password_change_done'),
-        },
+        auth_views.PasswordChangeView.as_view(
+            template_name='accounts/password_change_form.html',
+            success_url=(
+                urlresolvers.reverse_lazy('accounts:password_change_done')
+            ),
+            extra_context={
+                'base_template': base_template
+            }
+        ),
         name='password_change'
     ),
     urls.url(
         r'^password_change/done/$',
-        auth_views.password_change_done,
-        {'template_name': 'accounts/password_change_done.html'},
+        auth_views.PasswordChangeDoneView.as_view(
+            template_name='accounts/password_change_done.html',
+            extra_context={
+                'base_template': base_template
+            }
+        ),
         name='password_change_done'
     ),
     urls.url(
         r'^password_reset/$',
-        auth_views.password_reset,
-        {
-            'template_name': 'accounts/password_reset_form.html',
-            'email_template_name': 'accounts/password_reset_email.html',
-            'post_reset_redirect':
-                urlresolvers.reverse_lazy('accounts:password_reset_done'),
-        },
+        auth_views.PasswordResetView.as_view(
+            template_name='accounts/password_reset_form.html',
+            email_template_name='accounts/password_reset_email.html',
+            success_url=(
+                urlresolvers.reverse_lazy('accounts:password_reset_done')
+            ),
+            extra_context={
+                'base_template': base_template
+            }
+        ),
         name='password_reset'
     ),
     urls.url(
         r'^password_reset/done/$',
-        auth_views.password_reset_done,
-        {'template_name': 'accounts/password_reset_done.html'},
+        auth_views.PasswordResetDoneView.as_view(
+            template_name='accounts/password_reset_done.html',
+            extra_context={
+                'base_template': base_template
+            }
+        ),
         name='password_reset_done'),
     urls.url(
         r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/'
         r'(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        auth_views.password_reset_confirm,
-        {
-            'template_name': 'accounts/password_reset_confirm.html',
-            'post_reset_redirect':
-                urlresolvers.reverse_lazy('accounts:password_reset_complete'),
-        },
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name='accounts/password_reset_confirm.html',
+            success_url=(
+                urlresolvers.reverse_lazy('accounts:password_reset_complete')
+            ),
+            extra_context={
+                'base_template': base_template
+            }
+        ),
         name='password_reset_confirm'),
     urls.url(
         r'^reset/done/$',
-        auth_views.password_reset_complete,
-        {'template_name': 'accounts/password_reset_complete.html'},
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name='accounts/password_reset_complete.html',
+            extra_context={
+                'base_template': base_template
+            }
+        ),
         name='password_reset_complete'
     ),
     urls.url(

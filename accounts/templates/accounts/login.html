@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends base_template %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
 
-    {% include 'utils/snippets/messages.html' %}
+    {% include 'utils/messages.html' %}
     <div class="panel panel-default" style="margin-top: 20px;">
         <div class="panel-heading">
             <h3 class="panel-title">Log in</h3>
@@ -38,7 +38,9 @@
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-log-in"
+                            aria-hidden="true"
+                            ></span>
                         Log in
                     </button>
                 </div>
@@ -47,8 +49,12 @@
         </div>
         <div class="panel-footer">
             {# Assumes you setup the password_reset view in your URLconf #}
-            <a href="{% url 'accounts:password_reset' %}" class="btn btn-default">
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+            <a href="{% url 'accounts:password_reset' %}"
+                class="btn btn-default"
+                >
+                <span class="glyphicon glyphicon-question-sign"
+                    aria-hidden="true"
+                    ></span>
                 Lost password?
             </a>
         </div>
