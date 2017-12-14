@@ -13,6 +13,7 @@ setup(
     version='0.3.1',  # major.minor[.patch][sub]
     packages=['accounts'],
     include_package_data=True,
+    install_requires=['django', 'django-crispy-forms'],
     license='MIT License',
     description='Easy accounts integration for the Django web framework',
     long_description=README,
