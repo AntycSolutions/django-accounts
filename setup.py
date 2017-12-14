@@ -10,7 +10,7 @@ os.chdir(path.normpath(path.join(path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-accounts',
-    version='0.3.1',  # major.minor[.patch][sub]
+    version='0.3.2',  # major.minor[.patch][sub]
     packages=['accounts'],
     include_package_data=True,
     install_requires=['django', 'django-crispy-forms'],
