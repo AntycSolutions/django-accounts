@@ -1,16 +1,22 @@
 from django.conf import urls
-from django.core import urlresolvers
+try:
+    from django.core import urlresolvers
+    carret = '^'
+except ImportError:
+    from django import urls as urlresolvers
+    carret = ''
 from django.contrib.auth import views as auth_views, decorators
 
 from accounts import views as accounts_views, forms
 from accounts.conf import settings
 
 
+app_name = 'accounts'
 base_template = settings['base_template']
 
 urlpatterns = [
     urls.url(
-        r'^login/$',
+        r'{}login/$'.format(carret),
         auth_views.LoginView.as_view(
             template_name='accounts/login.html',
             authentication_form=forms.AuthenticationForm,
@@ -21,7 +27,7 @@ urlpatterns = [
         name='login'
     ),
     urls.url(
-        r'^logout/$',
+        r'{}logout/$'.format(carret),
         auth_views.LogoutView.as_view(
             template_name='accounts/logout.html',
             extra_context={
@@ -31,7 +37,7 @@ urlpatterns = [
         name='logout'
     ),
     urls.url(
-        r'^password_change/$',
+        r'{}password_change/$'.format(carret),
         auth_views.PasswordChangeView.as_view(
             template_name='accounts/password_change_form.html',
             success_url=(
@@ -44,7 +50,7 @@ urlpatterns = [
         name='password_change'
     ),
     urls.url(
-        r'^password_change/done/$',
+        r'{}password_change/done/$'.format(carret),
         auth_views.PasswordChangeDoneView.as_view(
             template_name='accounts/password_change_done.html',
             extra_context={
@@ -54,7 +60,7 @@ urlpatterns = [
         name='password_change_done'
     ),
     urls.url(
-        r'^password_reset/$',
+        r'{}password_reset/$'.format(carret),
         auth_views.PasswordResetView.as_view(
             template_name='accounts/password_reset_form.html',
             email_template_name='accounts/password_reset_email.html',
@@ -68,7 +74,7 @@ urlpatterns = [
         name='password_reset'
     ),
     urls.url(
-        r'^password_reset/done/$',
+        r'{}password_reset/done/$'.format(carret),
         auth_views.PasswordResetDoneView.as_view(
             template_name='accounts/password_reset_done.html',
             extra_context={
@@ -77,7 +83,7 @@ urlpatterns = [
         ),
         name='password_reset_done'),
     urls.url(
-        r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/'
+        r'{}reset/(?P<uidb64>[0-9A-Za-z_\-]+)/'.format(carret) +
         r'(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         auth_views.PasswordResetConfirmView.as_view(
             template_name='accounts/password_reset_confirm.html',
@@ -90,7 +96,7 @@ urlpatterns = [
         ),
         name='password_reset_confirm'),
     urls.url(
-        r'^reset/done/$',
+        r'{}reset/done/$'.format(carret),
         auth_views.PasswordResetCompleteView.as_view(
             template_name='accounts/password_reset_complete.html',
             extra_context={
@@ -100,7 +106,7 @@ urlpatterns = [
         name='password_reset_complete'
     ),
     urls.url(
-        r'^(?P<pk>\d+)/$',
+        r'{}(?P<pk>\d+)/$'.format(carret),
         decorators.login_required(accounts_views.UserDetail.as_view()),
         name='user_detail'
     ),
