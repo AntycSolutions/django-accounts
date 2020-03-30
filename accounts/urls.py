@@ -110,4 +110,9 @@ urlpatterns = [
         decorators.login_required(accounts_views.UserDetail.as_view()),
         name='user_detail'
     ),
+    urls.url(
+        r'{}create/$'.format(carret),
+        accounts_views.UserCreate.as_view(),
+        name='user_create'
+    ),
 ]
